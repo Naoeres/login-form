@@ -156,10 +156,11 @@ label {
 
 /* -------------------------------------------------- */
 
-#password-form > input, #reset-form > input, #reset-form > div > input {
+#password-form > input, #reset-form > input {
     font-size: 1em;
     height: 35px;
-    width: 400px;
+    width: 380px;
+    padding: 0 10px;
     border: 1px solid rgb(192, 192, 192);
     border-radius: 5px;
     box-sizing: content-box;
@@ -171,9 +172,27 @@ label {
     background-color: rgb(219, 214, 214);
 }
 
-#reset-form > div > a {
-    color: #000;
+#reset-form > div {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+}
+
+#reset-form > input:focus, #password-form > input:focus {
+    outline: 1px solid rgb(192, 192, 192);
+}
+
+#reset-form > div > a, #reset-form > div > input {
+    height: 35px;
+    width: 195px;
+    display: inline-block;
+    box-sizing: content-box;
+    border: 1px solid rgb(192, 192, 192);
     background-color: rgb(219, 214, 214);
+    color: #000;
+    border-radius: 5px;
+    font-size: 1em;
+    margin: 10px 0;
 }
 
 #reset-btn:hover, #password-btn:hover, #reset-form > div > a:hover {
