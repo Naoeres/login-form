@@ -11,24 +11,38 @@
     <main>
         <section>
 
-            <form action="" id="login-form">
-                <h2>Login </h2>
+            <form action="" id="create-form">
+                <h2>Create Your New Account </h2>
 
-                <label for="email"> First Name</label>
-                <input type="email" name="email" id="email">
-
-                <label for="email"> Last Name</label>
-                <input type="email" name="email" id="email">
-
-                <label for="email"> Email Address</label>
-                <input type="email" name="email" id="email">
-
-                <label for="password"> Password </label>
-                <input type="password" name="password" id="password">
+                <div class="inputs">
+                    <label for="f-name"> First Name</label>
+                    <input type="f-name" name="f-name" id="f-name">
+                </div>
                 
-                <input type="submit" name="submit" value="Login" id="login-btn">
+                <div class="inputs">
+                    <label for="l-name"> Last Name</label>
+                    <input type="l-name" name="l-name" id="l-name">
+                </div>
+                
 
-                <div>
+                <div class="inputs">
+                    <label for="email"> Email Address</label>
+                    <input type="email" name="email" id="email">
+                </div>
+                
+
+                <div class="inputs">
+                    <label for="password"> Password </label>
+                    <input type="password" name="password" id="password">
+                </div>
+                
+                
+                <div class="inputs">
+                    <input type="submit" name="submit" value="Create Account" id="login-btn">
+                </div>
+                
+
+                <div id="go-back">
                     <p>Already have an account? </p>
                     <a href="../index.html">Sign In</a>
                 </div>
