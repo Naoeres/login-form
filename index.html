@@ -10,7 +10,6 @@
 
     <main>
         <section>
-            <h1>Login Area</h1>
 
             <form action="" id="login-form">
                 <h2>Login </h2>
@@ -18,7 +17,7 @@
                 <input type="text" name="emailOrPhone" id="emailOrPhone">
                 
                 <label for="password"> Password </label>
-                <a href="#">Forgot Password?</a>
+                <a href="#" id="forgot-password">Forgot Password?</a>
                 <input type="password" name="password" id="password">
                 
                 <input type="submit" name="submit" value="Login" id="login-btn">
@@ -26,12 +25,17 @@
                     <input type="checkbox" name="keepSigned">
                     Keep me signed?
                 </label>
-            </form>
 
-            <div id="new-account">
-                <h3>New Around Here?</h3>
-                <a href="#">Create your account</a>
-            </div>
+                <p>Or</p>
+
+                <a href="#" class="login-other" id="login-F"> <img src="./assets/images/U7MAWJlE6hZ.png" alt="facebook-icon"> Login with Facebook</a>
+                <a href="#" class="login-other" id="login-G"> <img src="./assets/images/favicon.ico" alt="google-icon"> Login with Google</a>
+
+                <div id="new-account">
+                    <p>New Around Here?</p>
+                    <a href="#">Create your account</a>
+                </div>
+            </form>
         </section>
     </main>
     
