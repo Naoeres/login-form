@@ -4,14 +4,9 @@
 }
 
 body {
-    background-image: url("/assets/images/pexels-fauxels-3184339.jpg");
-    background-repeat: no-repeat; 
-    background-size: cover;
-    background-position: center;
-    background-color: #5085d5 ;
+    background: linear-gradient(90deg, rgba(64,106,177,1), rgba(80,133,213,1), rgba(66,146,220,1));
     font-family: Arial, Helvetica, sans-serif;
 }
-
 /* ------------------------------------------------ */
 
 main {
@@ -36,7 +31,7 @@ a:hover {
     color: #4679c5;
 }
 
-#login-form {
+form {
     width: 400px;
     padding: 30px 20px;
     border-radius: 10px;
@@ -116,7 +111,7 @@ a:hover {
     text-decoration: none;
 }
 
-.login-other {
+.login-other, #reset-form > div > a {
     margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #C0C0C0;
@@ -158,3 +153,32 @@ a:hover {
     background-color: #3f8bee;
 }
 
+/* -------------------------------------------------- */
+
+#password-form > input, #reset-form > input, #reset-form > div > input {
+    font-size: 1em;
+    height: 35px;
+    width: 400px;
+    border: 1px solid rgb(192, 192, 192);
+    border-radius: 5px;
+    box-sizing: content-box;
+    margin: 10px 0;
+} 
+
+#reset-btn, #password-btn {
+    cursor: pointer;
+    background-color: rgb(219, 214, 214);
+}
+
+#reset-form > div > a {
+    color: #000;
+    background-color: rgb(219, 214, 214);
+}
+
+#reset-btn:hover, #password-btn:hover, #reset-form > div > a:hover {
+    background-color: rgb(161, 161, 161);
+}
+
+#reset-form > h2, #password-form > h2 {
+    margin-bottom: 15px;
+}
