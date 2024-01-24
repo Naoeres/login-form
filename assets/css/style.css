@@ -6,6 +6,7 @@
 body {
     background: linear-gradient(90deg, rgba(64,106,177,1), rgba(80,133,213,1), rgba(66,146,220,1));
     font-family: Arial, Helvetica, sans-serif;
+    text-transform: capitalize;
 }
 /* ------------------------------------------------ */
 
@@ -235,7 +236,12 @@ label {
 
 /* ---------------------------------------------------------------- */
 
-#error {
+.error {
     color: red;
+    font-style: italic;
+}
+
+.success {
+    color: rgb(122, 204, 0);
     font-style: italic;
 }
