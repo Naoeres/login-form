@@ -82,13 +82,13 @@ label {
     margin: 10px 0;
 }
 
-#login-btn {
+#login-btn, #create-btn {
     cursor: pointer;
     background-color: rgb(219, 214, 214);
     font-size: 1.2em;
 }
 
-#login-btn:hover {
+#login-btn:hover, #create-btn:hover {
     background-color: rgb(161, 161, 161);
 }
 
@@ -231,4 +231,11 @@ label {
 
 #go-back > a {
     text-decoration: none;
+}
+
+/* ---------------------------------------------------------------- */
+
+#error {
+    color: red;
+    font-style: italic;
 }
