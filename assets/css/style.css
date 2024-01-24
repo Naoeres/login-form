@@ -204,6 +204,14 @@ label {
     margin-bottom: 15px;
 }
 
+#password-form > div {
+    margin-top: 15px;
+}
+
+#password-form > div > a {
+    text-decoration: none;
+}
+
 /* --------------------------------------------------------------- */
 
 .inputs > input {
