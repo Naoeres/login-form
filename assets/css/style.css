@@ -247,7 +247,21 @@ label {
 #users-body {
     text-transform: capitalize;
     height: 100vh;
-    background-color: #F0F0F0;
+    background: #F0F0F0;
+    padding: 20px;
+}
+
+#users-body > ul {
+    padding: 20px;
+}
+
+#users-body > h1, #users-body > h3 {
+    margin: 20px 0;
+
+}
+
+.delete {
+    margin-left: 10px;
 }
 
 .error {

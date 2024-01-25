@@ -18,8 +18,8 @@ const crePassword = document.querySelector("#cre-password");
 
 const message = document.querySelector("#message");
 
-const ulEl = document.querySelector('ul');
-const helloUser = document.querySelector('#hello-user');
+const ulEl = document.querySelector("ul");
+const helloUser = document.querySelector("#hello-user");
 
 let id = 0;
 
@@ -28,30 +28,29 @@ let objList = [];
 let error = "";
 let success = "";
 
-let params = {
-    'firstName': '',
-    'lastName': ''
-};
-let emailLogin = '';
-let passwordLogin ='';
+let params = {};
+let emailLogin = "";
+let passwordLogin = "";
 
 /* Create a account area */
-const accountLink = document.querySelector('#new-account > a');
-if(accountLink) {
-    accountLink.addEventListener('click', e => {
-        getUser()
-        if(!objList) {
-            objList = [{
-                'id': id,
-                'fName': 'admin',
-                'lName': 'admin',
-                'email': 'admin@email.com',
-                'password': '12345'
-            }];
-            id++;
+const accountLink = document.querySelector("#new-account > a");
+if (accountLink) {
+    accountLink.addEventListener("click", (e) => {
+        getUser();
+        if (!objList) {
+            objList = [
+                {
+                    id: id,
+                    fName: "admin",
+                    lName: "admin",
+                    email: "admin@email.com",
+                    password: "12345",
+                },
+            ];
+            localStorage.setItem("id", id);
             setUser();
         }
-    })
+    });
 }
 
 if (createForm) {
@@ -69,6 +68,8 @@ if (createForm) {
             message.classList.add("error");
             return;
         }
+
+        id = JSON.parse(localStorage.getItem("id"));
 
         createUser(id, fName.value, lName.value, email.value, crePassword.value);
 
@@ -110,13 +111,13 @@ if (passwordForm) {
             print(emailFlag);
             return;
         }
-        
+
         getUser();
-        let newList = []
-        objList.forEach(e => {
-            if(e.email === emailFlag) e.password = fPassword.value;
+        let newList = [];
+        objList.forEach((e) => {
+            if (e.email === emailFlag) e.password = fPassword.value;
             newList.push(e);
-        })
+        });
         objList = newList;
         setUser();
 
@@ -149,66 +150,104 @@ if (resetForm) {
 /* --------------------------------------------------------------- */
 /* Login Area */
 
-if(loginBtn) {
-
-    loginBtn.addEventListener('click', e => {
-
-        if(!emailIndex.value || !password.value) {
-            e.preventDefault()
+if (loginBtn) {
+    loginBtn.addEventListener("click", (e) => {
+        if (!emailIndex.value || !password.value) {
+            e.preventDefault();
             error = "all the fields should be filled!";
             message.classList.add("error");
             message.innerHTML = error;
             return;
         }
 
+        params = {
+            temporaryId: "",
+            firstName: "",
+            lastName: "",
+        };
+
         getUser();
-        objList.map(e => {
-            if(e.email === emailIndex.value && e.password === password.value) {
-                params.firstName = e.fName;
-                params.lastName = e.lName; 
-                emailLogin = e.email;
-                passwordLogin = e.password;
+        objList.map((obj) => {
+            if (obj.email === emailIndex.value && obj.password === password.value) {
+                params.temporaryId = obj.id;
+                params.firstName = obj.fName;
+                params.lastName = obj.lName;
+                emailLogin = obj.email;
+                passwordLogin = obj.password;
             }
         });
 
-        if(!emailLogin || !passwordLogin) {
-            e.preventDefault()
+        if (!emailLogin || !passwordLogin) {
+            e.preventDefault();
             error = "wrong password or wrong email!";
             message.classList.add("error");
             message.innerHTML = error;
             return;
         }
 
-        localStorage.setItem('user', JSON.stringify(params));
+        localStorage.setItem("user", JSON.stringify(params));
 
-        document.location.href = './pages/users.html'
-    })
+        document.location.href = "./pages/users.html";
+    });
 }
 
-window.addEventListener('load', e => {
+window.addEventListener("load", (e) => {
     let nameF;
     let nameL;
+    let tempId;
 
-    
-
-    params = JSON.parse(localStorage.getItem('user'));
-    if(params) {
+    params = JSON.parse(localStorage.getItem("user"));
+    if (params) {
+        tempId = params.temporaryId;
         nameF = params.firstName;
-        nameL = params.lastName
+        nameL = params.lastName;
     }
 
-
-    if(helloUser) {
+    if (helloUser) {
         helloUser.innerHTML = `Hello ${nameF} ${nameL}`;
     }
-    
-    if(ulEl) {
-        createUserList(emailLogin, passwordLogin);
+
+    if (ulEl) {
+        createUserList(emailLogin, passwordLogin, tempId);
     }
-})
+});
+
+document.addEventListener("click", (e) => {
+    const el = e.target;
+
+    let tempList = [];
+    let li = null;
+    let liList = [];
+
+    print(li);
+
+    if (el.classList.contains("delete")) {
+        el.parentElement.remove();
+        li = document.querySelectorAll("ul > li");
+
+        li.forEach((e) => {
+            liList.push(parseInt(e.innerHTML.split("")[0]));
+        });
+
+        getUser();
+        objList.forEach((e) => {
+            if (liList.includes(e.id)) tempList.push(e);
+            console.log(e.id);
+        });
+
+        objList = tempList;
+        setUser();
+        print(tempList);
+        print(liList);
+    }
+});
+
+/* ------------------------------------------------------------------------ */
 
 function createUser(id, fName, lName, email, password) {
     getUser();
+
+    id++;
 
     objList.push({
         id,
@@ -218,7 +257,7 @@ function createUser(id, fName, lName, email, password) {
         password,
     });
 
-    id++;
+    localStorage.setItem("id", id);
 
     setUser();
 }
@@ -231,17 +270,20 @@ function getUser() {
     objList = JSON.parse(localStorage.getItem("users"));
 }
 
-function createUserList(email, password) {
-    if(email === 'admin@email.com' && password === 'admin') {
-        getUser()
-        objList.forEach(e => {
-            ulEl.innerHTML += `<li> ${e.fName} ${e.lName} -> ${e.email} -> ${e.password} <button id="delete"> delete </button> </li>`;
-        })
-    }
-    else {
-        getUser()
-        objList.forEach(e => {
-            ulEl.innerHTML += `<li> ${e.fName} ${e.lName} -> ${e.email} -> ${e.password}</li>`;
-        })
+function createUserList(email, password, id) {
+    if (id == "0") {
+        getUser();
+        objList.forEach((e) => {
+            if ((e.id === 0)) {
+                ulEl.innerHTML += `<li>${e.id} -> ${e.fName} ${e.lName} -> ${e.email} -> ${e.password} </li>`;
+            } else {
+                ulEl.innerHTML += `<li>${e.id} -> ${e.fName} ${e.lName} -> ${e.email} -> ${e.password} <button class="delete" id="delete${e.id}"> delete </button> </li>`;
+            }
+        });
+    } else {
+        getUser();
+        objList.forEach((e) => {
+            ulEl.innerHTML += `<li>${e.id} -> ${e.fName} ${e.lName} -> ${e.email} -> ${e.password} </li>`;
+        });
     }
 }
