@@ -167,23 +167,33 @@ if (loginBtn) {
         };
 
         getUser();
-        objList.map((obj) => {
-            if (obj.email === emailIndex.value && obj.password === password.value) {
-                params.temporaryId = obj.id;
-                params.firstName = obj.fName;
-                params.lastName = obj.lName;
-                emailLogin = obj.email;
-                passwordLogin = obj.password;
+        if(objList) {
+            objList.map((obj) => {
+                if (obj.email === emailIndex.value && obj.password === password.value) {
+                    params.temporaryId = obj.id;
+                    params.firstName = obj.fName;
+                    params.lastName = obj.lName;
+                    emailLogin = obj.email;
+                    passwordLogin = obj.password;
+                }
+            });
+    
+            if (!emailLogin || !passwordLogin) {
+                e.preventDefault();
+                error = "wrong password or wrong email!";
+                message.classList.add("error");
+                message.innerHTML = error;
+                return;
             }
-        });
-
-        if (!emailLogin || !passwordLogin) {
+        }
+        else {
             e.preventDefault();
-            error = "wrong password or wrong email!";
+            error = "no users registered!";
             message.classList.add("error");
             message.innerHTML = error;
             return;
         }
+        
 
         localStorage.setItem("user", JSON.stringify(params));
 
